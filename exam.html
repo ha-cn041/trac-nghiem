@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <button onclick="back()"
+        style="position: absolute; top: 50px; background: blue; padding: 10px 20px; color: white; margin-left: 20px; border-radius: 5px; display: flex; align-items: center;">
+        <i class="fa-solid fa-arrow-left" style="margin-right: 5px;"></i>
+        Quay về
+    </button>
+    <div class="Nav-menu" id="NavMenu" style="display: block;">
+        <ul>
+            <li><a href="./index.html" class="link active"><i class="fa-solid fa-house"></i>Home</a></li>
+            <li><a href="admin.html" class="link"><i class="fa-solid fa-blog"></i>Test</a></li>
+            <!--KHI MUON TEST DIEN LINK-->
+            <li><a href="#" class="link"><i class="fa-brands fa-usps"></i>Services</a></li>
+            <li><a href="#" class="link"><i class="fa-solid fa-magnifying-glass"></i>Ca Nhan</a></li>
+        </ul>
+    </div>
+    <div style="display: flex; align-items: center; flex-direction: column;" id="header">
+
+    </div>
+    <div id="timer">Thời gian còn lại: 60:00</div>
+    <div id="question-container"></div>
+
+    <!-- Nút gửi để nộp bài -->
+    <button onclick="submitAnswer()" id="submitExam">Nộp Bài</button>
+
+    <script>
+
+        // xử lý quay trở về
+        var back = () => {
+            window.history.back();
+        }
+
+        var answersUser = [
+            "Hồ Chí Minh", "Neil Armstrong", "Thomas Edison", "Bill Gates"
+        ]
+        var questions = [
+            {
+                question: 'Thủ đô của Việt Nam là gì?',
+                answers: ['Hà Nội', 'Hồ Chí Minh', 'Đà Nẵng', 'Nha Trang'],
+                correctAnswer: 'Hà Nội',
+                detail: "Thủ đô của Việt Nam là Hà Nội bạn nhé"
+            },
+            {
+                question: 'Ai là người đầu tiên đặt chân lên Mặt Trăng?',
+                answers: ['Neil Armstrong', 'Buzz Aldrin', 'Yuri Gagarin', 'Alan Shepard'],
+                correctAnswer: 'Neil Armstrong',
+                detail: "Người đầu tiên đặt chân lên Mặt Trăng là Neil Armstrong bạn nhé"
+            },
+            // Thêm các câu hỏi khác vào đây]
+            {
+                question: 'Ai là nhà phát minh ra đèn đốt và đèn điện?',
+                answers: ['Thomas Edison', 'Albert Einstein', 'Isaac Newton', 'Galileo Galilei'],
+                correctAnswer: 'Thomas Edison',
+                detail: "Thomas Edison là nhà phát minh ra đèn đốt và đèn điện bạn nhé"
+            },
+            {
+                question: 'Ai là người sáng lập ra Microsoft?',
+                answers: ['Steve Jobs', 'Jeff Bezos', 'Mark Zuckerberg', 'Bill Gates'],
+                correctAnswer: 'Bill Gates',
+                detail: "Bill Gates là người sáng lập ra Microsoft bạn nhé"
+            }
+        ];
+
+        var headerElement = document.getElementById("header");
+        var infoElement = document.getElementById("info");
+
+
+        headerElement.innerHTML = `
+        <h1 style="text-align: center; display=block; width: 100%">Bài thi cuối kỳ 2 năm học 2024-2025</h1>
+        <h3>Thời gian làm bài: 60 phút</h3>
+        <h3>Số câu hỏi: ${questions.length} Câu</h3>
+        `;
+
+        var questionContainer = document.getElementById('question-container');
+
+        // Hàm để tạo HTML cho câu hỏi
+        function renderQuestion(question, index) {
+            var html = '<div class="question">';
+            html += '<h2>' + `Câu ${index + 1}: ` + question.question + '</h2>';
+            html += '<div class="options">';
+            question.answers.forEach((answer) => {
+                html += '<label class="answer">';
+                html += `<input type="radio" name="answer${index}" value="${answer}">`;
+                html += answer;
+                html += '</label>';
+            });
+            html += '</div>';
+            html += '</div>';
+            return html;
+        }
+
+        // Hàm để hiển thị tất cả các câu hỏi trên trang
+        function renderQuestions() {
+            var html = '';
+            questions.forEach(function (question, index) {
+                html += renderQuestion(question, index);
+            });
+            questionContainer.innerHTML = html;
+        }
+
+        renderQuestions();
+        function submitAnswer() {
+            var confirmSubmit = confirm('Bạn có chắc chắn muốn nộp bài?');
+            if (confirmSubmit) {
+                timerDisplay.textContent = 'Thời gian còn lại: Hết giờ';
+                clearInterval(timerInterval);
+                // Thực hiện các hành động sau khi nộp bài (ví dụ: kiểm tra đáp án)
+                window.location.href = "./index.html"
+                alert('Bài thi đã được nộp thành công!');
+            }
+        }
+        // Đặt thời gian ban đầu là 60 phút * 60 giây
+        var totalTimeInSeconds = 60 * 60;
+        var timerDisplay = document.getElementById('timer');
+
+        // Hàm cập nhật thời gian
+        function updateTimer() {
+            var minutes = Math.floor(totalTimeInSeconds / 60);
+            var seconds = totalTimeInSeconds % 60;
+
+            // Định dạng để hiển thị thời gian
+            var formattedTime = ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2);
+
+            // Hiển thị thời gian trên trang
+            timerDisplay.textContent = 'Thời gian còn lại: ' + formattedTime;
+
+            // Giảm thời gian mỗi giây
+            totalTimeInSeconds--;
+
+            // Kiểm tra nếu thời gian đã hết
+            if (totalTimeInSeconds < 0) {
+                clearInterval(timerInterval);
+                timerDisplay.textContent = 'Hết giờ!';
+                // Thực hiện các hành động khi hết giờ (ví dụ: tự động nộp bài)
+                alert('Bài thi đã được nộp thành công!');
+            }
+        }
+
+        // Cập nhật thời gian mỗi giây
+        var timerInterval = setInterval(updateTimer, 1000);
+    </script>
+</body>
+
+</html>

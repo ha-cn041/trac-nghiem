@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+*{  
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+* {
+    box-sizing: border-box;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+
+#question-container{
+    padding: 20px;
+}
+.question .options{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.question .options .answer {
+    display: flex;
+    align-items: center;
+    padding-left: 60px;
+}
+
+.question .options .answer .answerTrue{
+    color: green;
+}
+
+.question .options .answer .answerFalse{
+    color: red;
+}
+
+.note{
+    margin: 10px 0px;
+    border: 1px solid black;
+    color: blue;
+    width: max-content;
+    padding: 10px 20px;
+}
+
+#submitExam{
+    margin-top: 20px;
+    padding: 15px 30px;
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+
+#timer{
+    color: red;
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+.nav-menu ul{
+    display: flex;
+}
+.nav-menu ul li{
+    list-style-type: none;
+}
+.nav-menu ul li .link{
+    text-decoration: none;
+    font-weight: 500;
+    color:   white;
+    padding-bottom: 15px;
+    margin: 0 25px;
+}
+.link:hover, .active{
+    border-bottom: 2px solid #fff;
+}
+.nav-button .btn{
+    width: 130px;
+    height: 40px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .3s ease;
+    color:rgba(0, 0, 255, 0.847);
+}
+.btn:hover{
+    background:#ad171c;
+}
+#registerBtn{
+    margin-left: 15px;
+}
+.btn.white-btn{
+    background: rgba(255, 255, 255, 0.5);
+}
+.btn.btn.white-btn:hover{
+    background: rgba(255, 255, 255, 0.5);
+}
+.nav-menu-btn{
+    display: none;
+}
+#NavMenu ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #ad171c;
+}
+
+#NavMenu ul li {
+    position: relative;
+}
+
+#NavMenu ul li a {
+    display: block;
+    padding: 10px 15px;
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
+#NavMenu ul li:nth-child(4) {
+    margin-left: auto; /* Đẩy mục Cá nhân về bên phải */
+}
+
+/* Phần tùy chỉnh icon */
+#NavMenu ul li i {
+    display: inline-block;
+    margin-right: 5px;
+}
